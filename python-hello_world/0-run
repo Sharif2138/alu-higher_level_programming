@@ -1,0 +1,4 @@
+#!/bin/bash
+
+[ -z "$PYFILE" ] || [ ! -f "$PYFILE" ] && { echo "Error: Environment variable PYFILE is not set or file not found."; exit 1; } || python "$PYFILE"
+
