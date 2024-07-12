@@ -68,4 +68,4 @@ class Rectangle:
         '''returns string'''
         w = self.__width
         h = self.__height
-        return ("Rectangle({:d}, {:d})".format(w, h
+        return ("Rectangle({:d}, {:d})".format(w, h)
