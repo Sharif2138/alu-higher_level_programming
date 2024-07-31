@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 class Student:
     def __init__(self, email, names):
         self.email = email
