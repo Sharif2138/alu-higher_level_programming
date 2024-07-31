@@ -22,6 +22,9 @@ def main():
             if choice == '1':
                 email = input("Enter student's email: ")
                 names = input("Enter student's names: ")
+                if not email or not names:
+                    print("Error: Email and names cannot be empty.")
+                    continue
                 student = Student(email, names)
                 grade_book.add_student(student)
                 print("Student added successfully!")
@@ -29,7 +32,13 @@ def main():
             elif choice == '2':
                 name = input("Enter course name: ")
                 trimester = input("Enter trimester: ")
-                credits = int(input("Enter credits: "))
+                try:
+                    credits = int(input("Enter credits: "))
+                    if credits <= 0:
+                        raise ValueError("Credits must be a positive integer.")
+                except ValueError:
+                    print("Error: Credits must be a valid positive integer.")
+                    continue
                 course = Course(name, trimester, credits)
                 grade_book.add_course(course)
                 print("Course added successfully!")
@@ -50,13 +59,22 @@ def main():
                     print(f"Student with email {email} not found.")
 
             elif choice == '4':
+                if not grade_book.student_list:
+                    print("No students to rank.")
+                    continue
                 ranking = grade_book.calculate_ranking()
                 print("\nRanking of Students based on GPA:")
                 for i, student in enumerate(ranking, start=1):
-                    print(f"{i}. {student.names} - GPA: {student.GPA}")
+                    print(f"{i}. {student.names} - GPA: {student.GPA:.2f}")
 
             elif choice == '5':
-                grade = float(input("Enter grade to search for: "))
+                try:
+                    grade = float(input("Enter grade to search for: "))
+                    if not (0 <= grade <= 100):
+                        raise ValueError("Grade must be between 0 and 100.")
+                except ValueError:
+                    print("Error: Please enter a valid grade between 0 and 100.")
+                    continue
                 matching_students = grade_book.search_by_grade(grade)
                 if matching_students:
                     print(f"\nStudents with grade {grade}:")
@@ -87,3 +105,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
