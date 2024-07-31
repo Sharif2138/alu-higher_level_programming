@@ -10,8 +10,8 @@ def main():
         print("\nGrade Book Application")
         print("1. Add Student")
         print("2. Add Course")
-        print("3. Student Course Registration")
-        print("4. Assign Grade")
+        print("3. Register Student for Course")
+        print("4. Assign Grade to Course")
         print("5. Calculate Ranking")
         print("6. Search by Grade")
         print("7. Generate Transcript")
@@ -38,6 +38,7 @@ def main():
             elif choice == '3':
                 email = input("Enter student's email: ")
                 course_name = input("Enter course name: ")
+
                 student = next((s for s in grade_book.student_list if s.email == email), None)
                 if student:
                     course = next((c for c in grade_book.course_list if c.name == course_name), None)
@@ -53,24 +54,27 @@ def main():
                 email = input("Enter student's email: ")
                 course_name = input("Enter course name: ")
                 grade = float(input("Enter grade: "))
+
                 student = next((s for s in grade_book.student_list if s.email == email), None)
                 if student:
                     try:
                         student.assign_grade(course_name, grade)
                         print(f"Grade {grade} assigned to course {course_name} for student {student.names}.")
                     except ValueError as e:
-                        print(e)
+                        print(f"Error: {e}")
                 else:
                     print(f"Student with email {email} not found.")
 
             elif choice == '5':
-                # Calculate ranking and display
-                for student in grade_book.student_list:
-                    student.calculate_GPA()
                 ranking = grade_book.calculate_ranking()
                 print("\nRanking of Students based on GPA:")
                 for i, student in enumerate(ranking, start=1):
-                    print(f"{i}. {student.names} - GPA: {student.GPA:.2f}")
+                    # Handle case where GPA might be None
+                    gpa_display = student.GPA if student.GPA is not None else "N/A"
+                    if isinstance(gpa_display, float):
+                        print(f"{i}. {student.names} - GPA: {gpa_display:.2f}")
+                    else:
+                        print(f"{i}. {student.names} - GPA: {gpa_display}")
 
             elif choice == '6':
                 grade = float(input("Enter grade to search for: "))
@@ -101,3 +105,6 @@ def main():
         
         except ValueError as e:
             print(f"Error: {e}")
+
+if __name__ == "__main__":
+    main()
