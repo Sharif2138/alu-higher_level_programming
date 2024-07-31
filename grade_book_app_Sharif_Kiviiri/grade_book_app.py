@@ -65,6 +65,7 @@ def main():
                 ranking = grade_book.calculate_ranking()
                 print("\nRanking of Students based on GPA:")
                 for i, student in enumerate(ranking, start=1):
+                    gpa = student.GPA if student.GPA is not None else 0.0
                     print(f"{i}. {student.names} - GPA: {student.GPA:.2f}")
 
             elif choice == '5':
