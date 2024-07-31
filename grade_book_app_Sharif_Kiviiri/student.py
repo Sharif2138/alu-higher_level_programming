@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 class Student:
     def __init__(self, email, names):
         self.email = email
@@ -10,11 +8,19 @@ class Student:
     def register_for_course(self, course):
         self.courses_registered.append(course)
 
+    def assign_grade(self, course_name, grade):
+        for course in self.courses_registered:
+            if course.name == course_name:
+                course.set_grade(grade)
+                break
+        else:
+            raise ValueError("Course not found in student's registered courses.")
+    
     def calculate_GPA(self):
         if not self.courses_registered:
             self.GPA = 0.0
             return self.GPA
-        
+
         total_credits = 0
         total_points = 0
 
@@ -29,3 +35,4 @@ class Student:
             self.GPA = 0.0
 
         return self.GPA
+
