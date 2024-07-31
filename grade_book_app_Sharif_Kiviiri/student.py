@@ -12,15 +12,14 @@ class Student:
         for course in self.courses_registered:
             if course.name == course_name:
                 course.set_grade(grade)
-                break
-        else:
-            raise ValueError("Course not found in student's registered courses.")
-    
+                return
+        raise ValueError(f"Course {course_name} not found for student {self.names}")
+
     def calculate_GPA(self):
         if not self.courses_registered:
             self.GPA = 0.0
             return self.GPA
-
+        
         total_credits = 0
         total_points = 0
 
@@ -33,6 +32,6 @@ class Student:
             self.GPA = total_points / total_credits
         else:
             self.GPA = 0.0
-
+        
         return self.GPA
 
