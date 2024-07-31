@@ -7,8 +7,8 @@ class Course:
         self.grade =  None
 
      def set_grade(self, grade):
-        if 0 <= grade <= 100:
+         if 0 <= grade <= 100:
             self.grade = grade
-        else:
-            raise ValueError("Grade must be between 0 and 100.")
+         else:
+             raise ValueError("Grade must be between 0 and 100.")
     
