@@ -1,4 +1,4 @@
-Grade Book Application Structure
+
 The Grade Book Application, designed in Python, empowers users to manage student records, courses, and transcripts seamlessly. It boasts essential features such as student registration, GPA computation, and comprehensive data search capabilities.
 
 Features
