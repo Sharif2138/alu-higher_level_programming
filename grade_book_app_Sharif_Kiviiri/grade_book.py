@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+ #!/usr/bin/env python3
 class GradeBook:
     def __init__(self):
         self.student_list = []
