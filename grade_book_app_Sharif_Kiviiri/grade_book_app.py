@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 from student import Student
 from course import Course
 from grade_book import GradeBook
