@@ -64,13 +64,10 @@ def main():
                     print(f"Student with email {email} not found.")
 
             elif choice == '5':
-                # Calculate ranking and display
-                for student in grade_book.student_list:
-                    student.calculate_GPA()
                 ranking = grade_book.calculate_ranking()
                 print("\nRanking of Students based on GPA:")
                 for i, student in enumerate(ranking, start=1):
-                    print(f"{i}. {student.names} - GPA: {student.GPA:.2f}")
+                    print(f"{i}. {student.names} - GPA: {student.calculate_GPA():.2f}")
 
             elif choice == '6':
                 grade = float(input("Enter grade to search for: "))
