@@ -6,10 +6,16 @@ class GradeBook:
         self.course_list = []
 
     def add_student(self, student):
-        self.student_list.append(student)
+        if student not in self.student_list:
+            self.student_list.append(student)
+        else:
+            raise ValueError("Student already exists.")
 
     def add_course(self, course):
-        self.course_list.append(course)
+        if course not in self.course_list:
+            self.course_list.append(course)
+        else:
+            raise ValueError("Course already exists.")
 
     def register_student_for_course(self, student, course):
         if student in self.student_list and course in self.course_list:
@@ -21,15 +27,16 @@ class GradeBook:
         return student.calculate_GPA()
 
     def calculate_ranking(self):
-        sorted_students = sorted(self.student_list, key=lambda student: student.GPA if student.GPA else 0, reverse=True)
+        sorted_students = sorted(self.student_list, key=lambda student: student.calculate_GPA(), reverse=True)
         return sorted_students
 
     def search_by_grade(self, grade):
         matching_students = []
         for student in self.student_list:
             for course in student.courses_registered:
-                if course.grade == grade:
-                    matching_students.append(student)
+                if course.get_grade(student.email) == grade:
+                    if student not in matching_students:
+                        matching_students.append(student)
                     break
         return matching_students
 
@@ -39,8 +46,9 @@ class GradeBook:
             transcript += f"Email: {student.email}\n"
             transcript += "Courses Registered:\n"
             for course in student.courses_registered:
-                transcript += f"- {course.name}, Trimester: {course.trimester}, Credits: {course.credits}, Grade: {course.grade}\n"
-            transcript += f"GPA: {student.GPA}\n"
+                grade = course.get_grade(student.email)
+                transcript += f"- {course.name}, Trimester: {course.trimester}, Credits: {course.credits}, Grade: {grade}\n"
+            transcript += f"GPA: {student.calculate_GPA():.2f}\n"
             return transcript
         else:
             raise ValueError("Student not found.")
