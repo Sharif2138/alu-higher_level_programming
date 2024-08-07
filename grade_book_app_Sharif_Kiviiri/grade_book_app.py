@@ -43,11 +43,11 @@ def main():
                     course = next((c for c in grade_book.course_list if c.name == course_name), None)
                     if course:
                         grade_book.register_student_for_course(student, course)
-                        print(f"Student {student.names} registered for course {course.name}!")
+                        print("Student {} registered for course {}!".format(student.names, course.name))
                     else:
-                        print(f"Course {course_name} not found.")
+                        print("Course {} not found.".format(course_name))
                 else:
-                    print(f"Student with email {email} not found.")
+                    print("Student with email {} not found.".format(email))
 
             elif choice == '4':
                 email = input("Enter student's email: ")
@@ -57,27 +57,27 @@ def main():
                 if student:
                     try:
                         student.assign_grade(course_name, grade)
-                        print(f"Grade {grade} assigned to course {course_name} for student {student.names}.")
+                        print("Grade {} assigned to course {} for student {}.".format(grade, course_name, student.names))
                     except ValueError as e:
                         print(e)
                 else:
-                    print(f"Student with email {email} not found.")
+                    print("Student with email {} not found.".format(email))
 
             elif choice == '5':
                 ranking = grade_book.calculate_ranking()
                 print("\nRanking of Students based on GPA:")
                 for i, student in enumerate(ranking, start=1):
-                    print(f"{i}. {student.names} - GPA: {student.calculate_GPA():.2f}")
+                    print("{}: {} - GPA: {:.2f}".format(i, student.names, student.calculate_GPA()))
 
             elif choice == '6':
                 grade = float(input("Enter grade to search for: "))
                 matching_students = grade_book.search_by_grade(grade)
                 if matching_students:
-                    print(f"\nStudents with grade {grade}:")
+                    print("Students with grade {}:".format(grade))
                     for student in matching_students:
-                        print(f"- {student.names}")
+                        print("- {}".format(student.names))
                 else:
-                    print(f"No students found with grade {grade}.")
+                    print("No students found with grade {}.".format(grade))
 
             elif choice == '7':
                 email = input("Enter student's email to generate transcript: ")
@@ -87,7 +87,7 @@ def main():
                     print("\nTranscript:")
                     print(transcript)
                 else:
-                    print(f"Student with email {email} not found.")
+                    print("Student with email {} not found.".format(email))
 
             elif choice == '8':
                 print("Exiting Grade Book Application.")
@@ -97,7 +97,7 @@ def main():
                 print("Invalid choice. Please enter a number from 1 to 8.")
         
         except ValueError as e:
-            print(f"Error: {e}")
+            print("Error: {}".format(e))
 
 if __name__ == "__main__":
     main()
