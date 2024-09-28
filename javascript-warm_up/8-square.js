@@ -10,4 +10,3 @@ if (isNaN(size)) {
     i++; // Move to the next row by increasing i
   }
 }
-
