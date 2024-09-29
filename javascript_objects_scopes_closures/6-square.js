@@ -6,7 +6,7 @@ const Square5 = require('./5-square');
 // Define the new Square class
 class Square extends Square5 {
   // Define the charPrint method
-  charPrint(c) {
+  charPrint (c) {
     // If 'c' is undefined, use 'X'
     const char = c === undefined ? 'X' : c;
 
