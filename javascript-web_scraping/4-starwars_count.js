@@ -14,9 +14,12 @@ request(apiUrl, function (error, response, body) {
 
     // Loop through each film
     for (const film of films) {
-      // Check if Wedge Antilles (ID 18) is in the characters list
-      if (film.characters.includes('https://swapi-api.alx-tools.com/api/people/18/')) {
-        count++;
+      // Check if any character URL contains '18' (Wedge Antilles' ID)
+      for (const characterUrl of film.characters) {
+        if (characterUrl.includes('/18/')) {
+          count++;
+          break; // Stop once Wedge Antilles is found in this movie
+        }
       }
     }
 
